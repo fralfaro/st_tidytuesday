@@ -1,7 +1,9 @@
 ![Logo for the TidyTuesday project, represented by the word TidyTuesday over a messy splash of black paint](images/tt_logo.png)
 
-![example workflow](https://github.com/fralfaro/st_tidytuesday/actions/workflows/documentation.yml/badge.svg)
-<a href="https://st_tidytuesday.streamlit.app/" target="_parent"><img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg"/></a> 
+
+<a href="https://tidytuesday.streamlit.app/" target="_parent"><img src="https://static.streamlit.io/badges/streamlit_badge_black_white.svg"/></a> 
+
+
 
 
 ## About TidyTuesday
