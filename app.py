@@ -127,7 +127,7 @@ def cs_body():
     
 
 
-    tab1, tab2 = st.tabs(["📊 TidyTuesday by Year", "📊 TidyTuesday by Dataset"])
+    tab1, tab2 = st.tabs(["📆 TidyTuesday by Year", "📆 TidyTuesday by Dataset"])
 
     with tab1:
         pattern = r"(\d{4})-(\d{2})-(\d{2})/"
