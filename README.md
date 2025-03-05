@@ -20,5 +20,5 @@ Our over-arching goal for TidyTuesday is to provide real-world datasets so that 
   
 <br>
 
-> 🔗 *This is an adaptation of the original repository:  [TidyTuesday Repository](https://github.com/rfordatascience/tidytuesday/blob/main/README.md?plain=1).*
+> 🔗 *This is an adaptation of the original repository:  [TidyTuesday Repository](https://github.com/rfordatascience/tidytuesday).*
         
