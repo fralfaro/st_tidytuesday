@@ -124,10 +124,19 @@ def cs_body():
         if response.status_code == 200:
             return response.text
         return None
+    
+
 
     tab1, tab2 = st.tabs(["📊 TidyTuesday by Year", "📊 TidyTuesday by Dataset"])
 
     with tab1:
+        pattern = r"(\d{4})-(\d{2})-(\d{2})/"
+
+        def replace_match(match):
+            year = match.group(1)
+            full_date = match.group(0).strip("/")  # Captura el `YYYY-MM-DD` y elimina la barra al final
+            return f"https://github.com/rfordatascience/tidytuesday/tree/main/data/{year}/{full_date}/"
+
         tabs = st.tabs([f"{year}" for year in years])
 
         for tab, year in zip(tabs, years):
@@ -135,7 +144,11 @@ def cs_body():
                 st.subheader(f"TidyTuesday Dataset for {year}")
                 readme_content = get_readme_content(year)
                 table_lines = list(filter(lambda line: "|" in line and not any(excl in line for excl in ["[Link]", " ---", "Link "]), (line.strip() for line in readme_content.split('\n'))))
+
                 table_text =  "\n \n" + "\n".join(table_lines)
+                table_text = re.sub(pattern, replace_match, table_text)
+
+
                 file_path = "tidytuesday.md"
                 with open(file_path, "w", encoding="utf-8") as file:
                     file.write(table_text)
@@ -153,7 +166,7 @@ def cs_body():
                 return f"Error loading file: {e}"
 
         text = ""
-        years = list(range(2019, 2026))[::-1]
+        years = list(range(2018, 2026))[::-1]
         for year in years:
             readme_content = get_readme_content(year)
             text += readme_content
