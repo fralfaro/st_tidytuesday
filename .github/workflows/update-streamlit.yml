@@ -1,20 +1,25 @@
-name: Update Streamlit App Weekly
+name: Auto-Update Streamlit App
 
 on:
   schedule:
-    - cron: '0 0 * * 3'  
-  workflow_dispatch: 
+    - cron: "0 0 * * *"  # Ejecuta el workflow todos los días a la medianoche UTC
+  workflow_dispatch:  # Permite ejecutarlo manualmente si lo necesitas
 
 jobs:
-  update:
+  update-app:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        
-      - name: Make an empty commit to trigger Streamlit Cloud update
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Update Dummy File
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit --allow-empty -m "chore: trigger Streamlit Cloud update [skip ci]"
+          echo "Last update: $(date)" > last_update.txt
+      
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add last_update.txt
+          git commit -m "Automated update - $(date)" || echo "No changes to commit"
           git push
