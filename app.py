@@ -171,13 +171,14 @@ def cs_body():
             readme_content = get_readme_content(year)
             text += readme_content
 
-        pattern = r"`(\d{4}-\d{2}-\d{2})`"      
+        pattern = r"\b\d{4}-\d{2}-\d{2}\b"    
         dates_list = re.findall(pattern, text)
         df = pd.DataFrame(dates_list, columns=["Date"])
         df["Date"] = pd.to_datetime(df["Date"])
         available_years = df["Date"].dt.year.unique()
         selected_year = st.selectbox("Select a year", available_years)
-        filtered_dates = df[df["Date"].dt.year == selected_year]["Date"].dt.strftime("%Y-%m-%d").tolist()
+        filtered_dates = df[df["Date"].dt.year == selected_year]["Date"].dt.strftime("%Y-%m-%d").unique().tolist()
+
 
         if filtered_dates:
             selected_date = st.selectbox("Select a date", filtered_dates)
